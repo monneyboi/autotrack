@@ -14,45 +14,72 @@ This MIDI note mapping is the default setting and is used when choosing the TRAC
 
 The Octatrack MKII responds to MIDI notes as follows:
 
-| NOTE     | FUNCTION                     | NOTE E   | FUNCTION                |
-| -------- | ---------------------------- | -------- | ----------------------- |
-| C1 (24)  | Audio Track 1 Play           | C4 (60)  | Combo rec               |
-| C#1 (25) | Audio Track 2 Play           | C#4 (61) | INAB rec                |
-| D1 (26)  | Audio Track 3 Play           | D4 (62)  | INCD rec                |
-| D#1 (27) | Audio Track 4 Play           | D#4 (63) | SRC3 rec                |
-| E1 (28)  | Audio Track 5 Play           | E4 (64)  | Pickup Play/Stop        |
-| F1 (29)  | Audio Track 6 Play           | F4 (65)  | Multiply                |
-| F#1 (30) | Audio Track 7 Play           | F#4 (66) | Mute active track       |
-| G1 (31)  | Audio Track 8 Play           | G4 (67)  | Cue active track        |
-| G#1 (32) |                              | G#4 (68) | Active track up         |
-| A1 (33)  | Sequencer Stop               | A4 (69)  | Active track down       |
-| A#1 (34) | Sequencer Start              | A#4 (70) | Toggle Seq sync         |
-| B1 (35)  | Sequencer Restart            | B4 (71)  | Toggle Seq sync + start |
-| C2 (36)  | Audio Track 1 Sample Trigger | C5 (72)  | Track Sample Pitch -12  |
-| C#2 (37) | Audio Track 2 Sample Trigger | C#5 (73) | Track Sample Pitch -11  |
-| D2 (38)  | Audio Track 3 Sample Trigger | D5 (74)  | Track Sample Pitch -10  |
-| D#2 (39) | Audio Track 4 Sample Trigger | D#5 (75) | Track Sample Pitch -9   |
-| E2 (40)  | Audio Track 5 Sample Trigger | E5 (76)  | Track Sample Pitch -8   |
-| F2 (41)  | Audio Track 6 Sample Trigger | F5 (77)  | Track Sample Pitch -7   |
-| F#2(42)  | Audio Track 7 Sample Trigger | F#5 (78) | Track Sample Pitch -6   |
-| G2 (43)  | Audio Track 8 Sample Trigger | G5 (79)  | Track Sample Pitch -5   |
-| G#2 (44) |                              | G#5 (80) | Track Sample Pitch -4   |
-| A2 (45)  |                              | A5 (81)  | Track Sample Pitch -3   |
-| A#2 (46) |                              | A#5 (82) | Track Sample Pitch -2   |
-| B2 (47)  |                              | B5 (83)  | Track Sample Pitch -1   |
-| C3 (48)  | MIDI Track 1 Play            | C6 (84)  | Track Sample Pitch 0    |
-| C#3 (49) | MIDI Track 2 Play            | C#6 (85) | Track Sample Pitch +1   |
-| D3 (50)  | MIDI Track 3 Play            | D6 (86)  | Track Sample Pitch +2   |
-| D#3 (51) | MIDI Track 4 Play            | D#6 (87) | Track Sample Pitch +3   |
-| E3 (52)  | MIDI Track 5 Play            | E6 (88)  | Track Sample Pitch +4   |
-| F3 (53)  | MIDI Track 6 Play            | F6 (89)  | Track Sample Pitch +5   |
-| F#3 (54) | MIDI Track 7 Play            | F#6 (90) | Track Sample Pitch +6   |
-| G3 (55)  | MIDI Track 8 Play            | G6 (91)  | Track Sample Pitch +7   |
-| G#3 (56) |                              | G#6 (92) | Track Sample Pitch +8   |
-| A3 (57)  |                              | A6 (93)  | Track Sample Pitch +9   |
-| A#3 (58) |                              | A#6 (94) | Track Sample Pitch +10  |
-| B3 (59)  |                              | B6 (95)  | Track Sample Pitch +11  |
-|          |                              | C7 (96)  | Track Sample Pitch +12  |
+| NOTE     | FUNCTION                     |
+| -------- | ---------------------------- |
+| C1 (24)  | Audio Track 1 Play           |
+| C#1 (25) | Audio Track 2 Play           |
+| D1 (26)  | Audio Track 3 Play           |
+| D#1 (27) | Audio Track 4 Play           |
+| E1 (28)  | Audio Track 5 Play           |
+| F1 (29)  | Audio Track 6 Play           |
+| F#1 (30) | Audio Track 7 Play           |
+| G1 (31)  | Audio Track 8 Play           |
+| A1 (33)  | Sequencer Stop               |
+| A#1 (34) | Sequencer Start              |
+| B1 (35)  | Sequencer Restart            |
+| C2 (36)  | Audio Track 1 Sample Trigger |
+| C#2 (37) | Audio Track 2 Sample Trigger |
+| D2 (38)  | Audio Track 3 Sample Trigger |
+| D#2 (39) | Audio Track 4 Sample Trigger |
+| E2 (40)  | Audio Track 5 Sample Trigger |
+| F2 (41)  | Audio Track 6 Sample Trigger |
+| F#2(42)  | Audio Track 7 Sample Trigger |
+| G2 (43)  | Audio Track 8 Sample Trigger |
+| C3 (48)  | MIDI Track 1 Play            |
+| C#3 (49) | MIDI Track 2 Play            |
+| D3 (50)  | MIDI Track 3 Play            |
+| D#3 (51) | MIDI Track 4 Play            |
+| E3 (52)  | MIDI Track 5 Play            |
+| F3 (53)  | MIDI Track 6 Play            |
+| F#3 (54) | MIDI Track 7 Play            |
+| G3 (55)  | MIDI Track 8 Play            |
+| C4 (60)  | Combo rec                    |
+| C#4 (61) | INAB rec                     |
+| D4 (62)  | INCD rec                     |
+| D#4 (63) | SRC3 rec                     |
+| E4 (64)  | Pickup Play/Stop             |
+| F4 (65)  | Multiply                     |
+| F#4 (66) | Mute active track            |
+| G4 (67)  | Cue active track             |
+| G#4 (68) | Active track up              |
+| A4 (69)  | Active track down            |
+| A#4 (70) | Toggle Seq sync              |
+| B4 (71)  | Toggle Seq sync + start      |
+| C5 (72)  | Track Sample Pitch -12       |
+| C#5 (73) | Track Sample Pitch -11       |
+| D5 (74)  | Track Sample Pitch -10       |
+| D#5 (75) | Track Sample Pitch -9        |
+| E5 (76)  | Track Sample Pitch -8        |
+| F5 (77)  | Track Sample Pitch -7        |
+| F#5 (78) | Track Sample Pitch -6        |
+| G5 (79)  | Track Sample Pitch -5        |
+| G#5 (80) | Track Sample Pitch -4        |
+| A5 (81)  | Track Sample Pitch -3        |
+| A#5 (82) | Track Sample Pitch -2        |
+| B5 (83)  | Track Sample Pitch -1        |
+| C6 (84)  | Track Sample Pitch 0         |
+| C#6 (85) | Track Sample Pitch +1        |
+| D6 (86)  | Track Sample Pitch +2        |
+| D#6 (87) | Track Sample Pitch +3        |
+| E6 (88)  | Track Sample Pitch +4        |
+| F6 (89)  | Track Sample Pitch +5        |
+| F#6 (90) | Track Sample Pitch +6        |
+| G6 (91)  | Track Sample Pitch +7        |
+| G#6 (92) | Track Sample Pitch +8        |
+| A6 (93)  | Track Sample Pitch +9        |
+| A#6 (94) | Track Sample Pitch +10       |
+| B6 (95)  | Track Sample Pitch +11       |
+| C7 (96)  | Track Sample Pitch +12       |
 
 - · Chromatic trig keys sent to the AUTO channel or the MIDI channel of the active track can, when in LIVE RECORDING mode or holding a note trig, be used to enter note trigs with locked PTCH parameters.
 - · CC messages sent to the auto channel or the MIDI channel of the active track can, when in LIVE RECORDING mode or when entering parameter and scene locks, be recorded.
