@@ -8,6 +8,7 @@ dependencies = [
     "click",
     "numpy",
     "sounddevice",
-    "faster-whisper",
+    "openai-whisper",
     "soundfile>=0.13.1",
+    "torch>=2.0.0",
 ]
