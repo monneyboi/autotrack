@@ -137,73 +137,72 @@ The track select and delay time select notes are used in conjunction with each o
 
 ## C.7 CTRL CHANGE MAPPINGS
 
-|                                | HEX DEC                        | CTRL PARAMETER                           | TRN                            | REC                            |
-| ------------------------------ | ------------------------------ | ---------------------------------------- | ------------------------------ | ------------------------------ |
-| $07                            | 07                             | Track level                              |                                | X                              |
-| $08                            | 08                             | Track balance                            |                                | X                              |
-| $10                            | 16                             | Playback param #1                        | X                              | X                              |
-| $11                            | 17                             | Playback param #2                        | X                              | X                              |
-| $12                            | 18                             | Playback param #3                        | X                              | X                              |
-| $13                            | 19                             | Playback param #4                        | X                              | X                              |
-| $14                            | 20                             | Playback param #5                        | X                              | X                              |
-| $15                            | 21                             | Playback param #6                        | X                              | X                              |
-| $16                            | 22                             | Amp param #1 (Attack)                    | X                              | X                              |
-| $17                            | 23                             | Amp param #2 (Hold)                      | X                              | X                              |
-| $18                            | 24                             | Amp param #3 (Release)                   | X                              | X                              |
-| $19                            | 25                             | Amp param #4 (Volume)                    | X                              | X                              |
-| $1A                            | 26                             | Amp param #5 (Balance)                   | X                              | X                              |
-| $1B                            | 27                             | Amp param #6 (N/A)                       | X                              | X                              |
-| $1C                            | 28                             | LFO param #1 (Speed 1)                   | X                              | X                              |
-| $1D                            | 29                             | LFO param #2 (Speed 2)                   | X                              | X                              |
-| $1E                            | 30                             | LFO param #3 (Speed 3)                   | X                              | X                              |
-| $1F                            | 31                             | LFO param #4 (Depth 1)                   | X                              | X                              |
-| $20                            | 32                             | LFO param #5 (Depth 2)                   | X                              | X                              |
-| $21                            | 33                             | LFO param #6 (Depth 3)                   | X                              | X                              |
-| $22                            | 34                             | FX1 param #1                             | X                              | X                              |
-| $23                            | 35                             | FX1 param #2                             | X                              | X                              |
-| $24                            | 36                             | FX1 param #3                             | X                              | X                              |
-| $25                            | 37                             | FX1 param #4                             | X                              | X                              |
-| $26                            | 38                             | FX1 param #5                             | X                              | X                              |
-| $27                            | 39                             | FX1 param #6                             | X                              | X                              |
-| $28                            | 40                             | FX2 param #1                             | X                              | X                              |
-| $29                            | 41                             | FX2 param #2                             | X                              | X                              |
-| $2A                            | 42                             | FX2 param #3                             | X                              | X                              |
-| $2B                            | 43                             | FX2 param #4                             | X                              | X                              |
-| $2C                            | 44                             | FX2 param #5                             | X                              | X                              |
-| $2D                            | 45                             | FX2 param #6                             | X                              | X                              |
-| $2E                            | 46                             | Track level                              | X                              | X                              |
-| $2F                            | 47                             | Cue level                                | X                              | X                              |
-| HEX DEC CTRL PARAMETER TRN REC | HEX DEC CTRL PARAMETER TRN REC | HEX DEC CTRL PARAMETER TRN REC           | HEX DEC CTRL PARAMETER TRN REC | HEX DEC CTRL PARAMETER TRN REC |
-| $30                            | 48                             | Crossfader                               | X                              | X                              |
-| $31                            | 49                             | Track Mute [0]=Unmuted, [1-127]=Muted    | X                              | X                              |
-| $32                            | 50                             | Track Solo [0]=No solo, [1-127]=Soloed   | X                              | X                              |
-| $33                            | 51                             | Track Cue [0]=Not Cued, [1-127]=Cued     | X                              | X                              |
-| $34                            | 52                             | Track Arm [0]=Trk disarm, [1-127]=Arm    | X                              | X                              |
-| $35                            | 53                             | Recrdr Arm [0]=Rec disarm, [1-127]=Arm   | X                              | X                              |
-| $36                            | 54                             | All Arm [0]=All disarm, [1-127]=Arm      | X                              | X                              |
-| $37                            | 55                             | Scene A Select                           | X                              | X                              |
-| $38                            | 56                             | Scene B Select                           | X                              | X                              |
-| $39                            | 57                             | Pickup SRC AB level                      |                                | X                              |
-| $3A                            | 58                             | Pickup SRC CD level                      |                                | X                              |
-| $3B                            | 59                             | Note on [0]=C-1, 127=G9)                 |                                | X                              |
-| $3C                            | 60                             | Note off [0] =C-1, 127=G9)               |                                | X                              |
-| $3D                            | 61                             | Send request, 0 = all audio CC           |                                | X                              |
-| $70                            | 112                            | MIDI Trk 1 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $71                            | 113                            | MIDI Trk 2 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $72                            | 114                            | MIDI Trk 3 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $73                            | 115                            | MIDI Trk 4 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $74                            | 116                            | MIDI Trk 5 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $75                            | 117                            | MIDI Trk 6 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $76                            | 118                            | MIDI Trk 7 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $77                            | 119                            | MIDI Trk 8 Mute [0]=Unmute, [1-127]=Mute | X                              | X                              |
-| $78                            | 120                            | MIDI Trk 1 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $79                            | 121                            | MIDI Trk 2 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $7A                            | 122                            | MIDI Trk 3 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $7B                            | 123                            | MIDI Trk 4 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $7C                            | 124                            | MIDI Trk 5 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $7D                            | 125                            | MIDI Trk 6 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $7E                            | 126                            | MIDI Trk 7 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
-| $7F                            | 127                            | MIDI Trk 8 Solo [0]=Unsolo, [1-127]=Solo | X                              | X                              |
+| HEX | DEC | CTRL PARAMETER                           | TRN | REC |
+| --- | --- | ---------------------------------------- | --- | --- |
+| $07 | 07  | Track level                              |     | X   |
+| $08 | 08  | Track balance                            |     | X   |
+| $10 | 16  | Playback param #1                        | X   | X   |
+| $11 | 17  | Playback param #2                        | X   | X   |
+| $12 | 18  | Playback param #3                        | X   | X   |
+| $13 | 19  | Playback param #4                        | X   | X   |
+| $14 | 20  | Playback param #5                        | X   | X   |
+| $15 | 21  | Playback param #6                        | X   | X   |
+| $16 | 22  | Amp param #1 (Attack)                    | X   | X   |
+| $17 | 23  | Amp param #2 (Hold)                      | X   | X   |
+| $18 | 24  | Amp param #3 (Release)                   | X   | X   |
+| $19 | 25  | Amp param #4 (Volume)                    | X   | X   |
+| $1A | 26  | Amp param #5 (Balance)                   | X   | X   |
+| $1B | 27  | Amp param #6 (N/A)                       | X   | X   |
+| $1C | 28  | LFO param #1 (Speed 1)                   | X   | X   |
+| $1D | 29  | LFO param #2 (Speed 2)                   | X   | X   |
+| $1E | 30  | LFO param #3 (Speed 3)                   | X   | X   |
+| $1F | 31  | LFO param #4 (Depth 1)                   | X   | X   |
+| $20 | 32  | LFO param #5 (Depth 2)                   | X   | X   |
+| $21 | 33  | LFO param #6 (Depth 3)                   | X   | X   |
+| $22 | 34  | FX1 param #1                             | X   | X   |
+| $23 | 35  | FX1 param #2                             | X   | X   |
+| $24 | 36  | FX1 param #3                             | X   | X   |
+| $25 | 37  | FX1 param #4                             | X   | X   |
+| $26 | 38  | FX1 param #5                             | X   | X   |
+| $27 | 39  | FX1 param #6                             | X   | X   |
+| $28 | 40  | FX2 param #1                             | X   | X   |
+| $29 | 41  | FX2 param #2                             | X   | X   |
+| $2A | 42  | FX2 param #3                             | X   | X   |
+| $2B | 43  | FX2 param #4                             | X   | X   |
+| $2C | 44  | FX2 param #5                             | X   | X   |
+| $2D | 45  | FX2 param #6                             | X   | X   |
+| $2E | 46  | Track level                              | X   | X   |
+| $2F | 47  | Cue level                                | X   | X   |
+| $30 | 48  | Crossfader                               | X   | X   |
+| $31 | 49  | Track Mute [0]=Unmuted, [1-127]=Muted    | X   | X   |
+| $32 | 50  | Track Solo [0]=No solo, [1-127]=Soloed   | X   | X   |
+| $33 | 51  | Track Cue [0]=Not Cued, [1-127]=Cued     | X   | X   |
+| $34 | 52  | Track Arm [0]=Trk disarm, [1-127]=Arm    | X   | X   |
+| $35 | 53  | Recrdr Arm [0]=Rec disarm, [1-127]=Arm   | X   | X   |
+| $36 | 54  | All Arm [0]=All disarm, [1-127]=Arm      | X   | X   |
+| $37 | 55  | Scene A Select                           | X   | X   |
+| $38 | 56  | Scene B Select                           | X   | X   |
+| $39 | 57  | Pickup SRC AB level                      |     | X   |
+| $3A | 58  | Pickup SRC CD level                      |     | X   |
+| $3B | 59  | Note on [0]=C-1, 127=G9)                 |     | X   |
+| $3C | 60  | Note off [0] =C-1, 127=G9)               |     | X   |
+| $3D | 61  | Send request, 0 = all audio CC           |     | X   |
+| $70 | 112 | MIDI Trk 1 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $71 | 113 | MIDI Trk 2 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $72 | 114 | MIDI Trk 3 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $73 | 115 | MIDI Trk 4 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $74 | 116 | MIDI Trk 5 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $75 | 117 | MIDI Trk 6 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $76 | 118 | MIDI Trk 7 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $77 | 119 | MIDI Trk 8 Mute [0]=Unmute, [1-127]=Mute | X   | X   |
+| $78 | 120 | MIDI Trk 1 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $79 | 121 | MIDI Trk 2 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $7A | 122 | MIDI Trk 3 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $7B | 123 | MIDI Trk 4 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $7C | 124 | MIDI Trk 5 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $7D | 125 | MIDI Trk 6 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $7E | 126 | MIDI Trk 7 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
+| $7F | 127 | MIDI Trk 8 Solo [0]=Unsolo, [1-127]=Solo | X   | X   |
 
 ## C.8 MIDI MODE CTRL CHANGE MAPPINGS
 
