@@ -12,6 +12,7 @@ from datetime import datetime
 import time
 from typing import List, Tuple, Optional, Any, Dict, Union
 from openai import OpenAI
+import pyttsx3
 
 load_dotenv()
 
@@ -26,8 +27,31 @@ logger = logging.getLogger("autotrack")
 # Initialize OpenAI client
 client = OpenAI(base_url="https://api.deepseek.com")
 
+# Initialize text-to-speech engine
+tts_engine = pyttsx3.init()
+
 # MIDI setup
 midi_out = rtmidi.MidiOut()
+
+# Read the Octatrack MIDI reference to provide context
+with open("/home/johan/Projects/autotrack/OCTA.md", "r") as f:
+    octa_midi_reference = f.read()
+
+system_prompt = f"""You are an assistant that controls an Octatrack sampler via MIDI.
+You interpret voice commands and translate them to MIDI messages.
+Here is the MIDI reference for the Octatrack:
+
+{octa_midi_reference}
+
+Be extremely concise in your responses - use 1-2 short sentences maximum.
+Focus only on the essential information about what action you're taking.
+
+When you need to control the Octatrack, use the tool call to send MIDI commands.
+Always include a short, conversational response in your content that confirms what action you're taking.
+
+Important: If you don't understand the request, or if the Octatrack does not support 
+the requested functionality, DO NOT send any MIDI messages. Instead, respond with a 
+brief explanation of why you can't perform the action."""
 
 
 def setup_midi(
@@ -99,10 +123,6 @@ def process_command_with_openai(command: str) -> Dict[str, Any]:
     """
     logger.info(f"Processing command with OpenAI: '{command}'")
 
-    # Read the Octatrack MIDI reference to provide context
-    with open("/home/johan/Projects/autotrack/OCTA.md", "r") as f:
-        octa_midi_reference = f.read()
-
     # Define function schema for OpenAI to use
     functions = [
         {
@@ -161,32 +181,117 @@ def process_command_with_openai(command: str) -> Dict[str, Any]:
     ]
 
     try:
+        messages = [
+            {
+                "role": "system",
+                "content": system_prompt,
+            },
+            {"role": "user", "content": command},
+        ]
+
         response = client.chat.completions.create(
             model="deepseek-chat",
-            messages=[
-                {
-                    "role": "system",
-                    "content": f"""You are an assistant that controls an Octatrack sampler via MIDI.
-You know how to interpret user voice commands and translate them to MIDI messages.
-Here is the MIDI reference for the Octatrack that you should use to decide what MIDI messages to send:
-
-{octa_midi_reference}
-
-Consider the user's request carefully and decide how to execute it on the Octatrack.
-You can only respond by calling the provided functions to send MIDI messages.
-Explain what you're doing in your response and why you chose the specific MIDI messages.""",
-                },
-                {"role": "user", "content": command},
-            ],
+            messages=messages,
             tools=functions,
             tool_choice="auto",
         )
 
         logger.debug(f"OpenAI response: {response}")
-        return response
+
+        message = response.choices[0].message
+        content = message.content or ""
+        midi_sent = False
+        tool_name = ""
+
+        # Check if there's a function call
+        if hasattr(message, "tool_calls") and message.tool_calls:
+            tool_call = message.tool_calls[0]  # Process first tool call
+            function_name = tool_call.function.name
+            function_args = json.loads(tool_call.function.arguments)
+            tool_name = function_name
+
+            logger.info(f"Executing {function_name} with args: {function_args}")
+
+            # Add the assistant's tool call to conversation
+            messages.append(
+                {
+                    "role": "assistant",
+                    "content": None,
+                    "tool_calls": [
+                        {
+                            "id": tool_call.id,
+                            "type": "function",
+                            "function": {
+                                "name": function_name,
+                                "arguments": tool_call.function.arguments,
+                            },
+                        }
+                    ],
+                }
+            )
+
+            # Execute the tool call
+            result = "No action taken"
+            if function_name == "send_midi_note":
+                send_midi_note(
+                    note=function_args.get("note", 60),
+                    velocity=function_args.get("velocity", 100),
+                    channel=function_args.get("channel", 0),
+                )
+                result = f"Sent MIDI note {function_args.get('note')} with velocity {function_args.get('velocity')} on channel {function_args.get('channel')}"
+                midi_sent = True
+            elif function_name == "send_midi_cc":
+                send_midi_cc(
+                    cc=function_args.get("cc", 0),
+                    value=function_args.get("value", 0),
+                    channel=function_args.get("channel", 0),
+                )
+                result = f"Sent MIDI CC {function_args.get('cc')} with value {function_args.get('value')} on channel {function_args.get('channel')}"
+                midi_sent = True
+
+            # Add the tool result to conversation
+            messages.append(
+                {"role": "tool", "tool_call_id": tool_call.id, "content": result}
+            )
+
+            # Get a response from the model with the tool result
+            if midi_sent:
+                try:
+                    logger.info("Getting model response after tool execution")
+                    follow_up_response = client.chat.completions.create(
+                        model="deepseek-chat", messages=messages
+                    )
+                    follow_up_content = follow_up_response.choices[0].message.content
+                    if follow_up_content:
+                        result = follow_up_content
+                except Exception as e:
+                    logger.error(f"Error getting follow-up response: {e}")
+                    if content:
+                        result = content
+                    else:
+                        result = f"MIDI sent: {tool_name} executed successfully."
+            else:
+                result = content or "No action taken"
+        else:
+            logger.warning("No tool calls found in the response")
+            result = content or "No action taken"
+
+        # Speak the response using text-to-speech
+        logger.info(f"Speaking response: {result}")
+        tts_engine.say(result)
+        tts_engine.runAndWait()
+
+        return result
+
     except Exception as e:
-        logger.error(f"Error processing command with OpenAI: {e}")
-        return {"error": str(e)}
+        logger.error(f"Error executing OpenAI actions: {e}")
+        error_msg = f"Error executing command: {str(e)}"
+
+        # Speak the error using text-to-speech
+        tts_engine.say(error_msg)
+        tts_engine.runAndWait()
+
+        return error_msg
 
 
 def execute_openai_actions(response: Any) -> str:
@@ -198,39 +303,6 @@ def execute_openai_actions(response: Any) -> str:
     Returns:
         String describing the actions taken
     """
-    try:
-        message = response.choices[0].message
-        content = message.content or ""
-
-        # Check if there's a function call
-        if hasattr(message, "tool_calls") and message.tool_calls:
-            for tool_call in message.tool_calls:
-                function_name = tool_call.function.name
-                function_args = json.loads(tool_call.function.arguments)
-
-                logger.info(f"Executing {function_name} with args: {function_args}")
-
-                if function_name == "send_midi_note":
-                    send_midi_note(
-                        note=function_args.get("note", 60),
-                        velocity=function_args.get("velocity", 100),
-                        channel=function_args.get("channel", 0),
-                    )
-                elif function_name == "send_midi_cc":
-                    send_midi_cc(
-                        cc=function_args.get("cc", 0),
-                        value=function_args.get("value", 0),
-                        channel=function_args.get("channel", 0),
-                    )
-
-            return content
-        else:
-            logger.warning("No tool calls found in the response")
-            return content or "No action taken"
-
-    except Exception as e:
-        logger.error(f"Error executing OpenAI actions: {e}")
-        return f"Error executing command: {str(e)}"
 
 
 def record_audio(duration=5, sample_rate=48000, device="hw:2,0"):
