@@ -1,6 +1,8 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This repository contains a program that allows voice control of the Octatrack
+sampler through voice commands. It uses a LLM and the octatrack midi reference
+to send midi commands to the octatrack.
 
 ## Code Style
 
